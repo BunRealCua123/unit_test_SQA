@@ -4,6 +4,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // Define base path
 define('BASE_PATH', dirname(__DIR__));
+define('APPPATH', BASE_PATH . '/app');
+define('APPURL', 'http://localhost:8080/PTIT-Do-An-Tot-Nghiep/umbrella-corporation');
+
+// Thêm định nghĩa hằng số web app
+define('TABLE_PREFIX', '');
+define('TABLE_USERS', 'users');
+define('TABLE_PACKAGES', 'packages');
+define('WEBSITE_NAME', 'Umbrella Corporation');
+define('VERSION', '1.0');
 
 // Load environment variables if .env exists
 if (file_exists(BASE_PATH . '/.env')) {
@@ -18,30 +27,20 @@ ini_set('display_errors', 1);
 // Start session
 session_start();
 
-// Mock User class if not exists
-if (!class_exists('User')) {
-    class User
+// Define helper functions
+if (!function_exists('active_theme')) {
+    function active_theme($param)
     {
-        private $data = [];
+        return BASE_PATH . '/themes/default';
+    }
+}
 
-        public function __construct()
+if (!class_exists('Input')) {
+    class Input
+    {
+        public static function get($param)
         {
-            $this->data = [
-                'id' => 1,
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-                'role' => 'admin'
-            ];
-        }
-
-        public function get($key)
-        {
-            return $this->data[$key] ?? null;
-        }
-
-        public function set($key, $value)
-        {
-            $this->data[$key] = $value;
+            return isset($_GET[$param]) ? $_GET[$param] : null;
         }
     }
 }
@@ -53,7 +52,17 @@ if (!class_exists('DB')) {
         public static function table($table)
         {
             return new class {
-                public function where($column, $operator, $value)
+                public function where($column, $operator = null, $value = null)
+                {
+                    return $this;
+                }
+
+                public function orWhere($column, $operator = null, $value = null)
+                {
+                    return $this;
+                }
+
+                public function leftJoin($table, $first, $operator, $second)
                 {
                     return $this;
                 }
@@ -108,12 +117,21 @@ if (!class_exists('DataEntry')) {
 
         public function get($key)
         {
+            if (strpos($key, '.') !== false) {
+                list($mainKey, $subKey) = explode('.', $key, 2);
+                if (isset($this->data[$mainKey])) {
+                    $jsonObj = json_decode($this->data[$mainKey], true);
+                    return $jsonObj[$subKey] ?? null;
+                }
+                return null;
+            }
             return $this->data[$key] ?? null;
         }
 
         public function set($key, $value)
         {
             $this->data[$key] = $value;
+            return $this;
         }
 
         public function isAvailable()
@@ -124,6 +142,17 @@ if (!class_exists('DataEntry')) {
         public function markAsAvailable()
         {
             $this->is_available = true;
+            return $this;
+        }
+
+        public function select($uniqid)
+        {
+            return $this;
+        }
+
+        public function save()
+        {
+            return $this;
         }
     }
 }
@@ -152,35 +181,94 @@ if (!class_exists('UserModel')) {
     }
 }
 
-// Mock Controller classes if not exists
-$controllers = [
-    'AppointmentController',
-    'AppointmentArrangeController',
-    'AppointmentRecordController',
-    'AppointmentRecordsController',
-    'AppointmentsController'
+// Mock DataList class if not exists
+if (!class_exists('DataList')) {
+    class DataList
+    {
+        protected $query;
+        protected $data = [];
+
+        public function setQuery($query)
+        {
+            $this->query = $query;
+            return $this;
+        }
+
+        public function getQuery()
+        {
+            return $this->query;
+        }
+
+        public function search($query)
+        {
+            return $this;
+        }
+
+        public function getSearchQuery()
+        {
+            return "";
+        }
+
+        public function paginate()
+        {
+            return $this;
+        }
+
+        public function fetchData()
+        {
+            return $this;
+        }
+    }
+}
+
+// Override header function for testing
+if (!function_exists('header_mock')) {
+    function header_mock($header)
+    {
+        // Do nothing in tests
+    }
+}
+
+// Create a proxy class that overrides the header function
+if (!function_exists('header')) {
+    function header($string)
+    {
+        // Do nothing in tests
+        return;
+    }
+}
+
+// Mock các include file fragment
+if (!function_exists('mock_include')) {
+    function mock_include($file)
+    {
+        // Do nothing
+        return true;
+    }
+}
+
+// Tạo fragment directory giả nếu chưa tồn tại
+$fragment_dir = APPPATH . '/views/fragments';
+if (!file_exists($fragment_dir)) {
+    mkdir($fragment_dir, 0777, true);
+}
+
+// Tạo các fragment files giả
+$fragments = [
+    'navleft.fragment.php',
+    'navtop.fragment.php',
+    'appointmentRecords.fragment.php',
+    'appointmentRecord.fragment.php',
+    'appointments.fragment.php',
+    'appointmentArrange.fragment.php',
+    'appointment.fragment.php',
+    'footer.fragment.php',
+    'javascript.fragment.php'
 ];
 
-foreach ($controllers as $controller) {
-    if (!class_exists($controller)) {
-        eval("class $controller {
-            protected \$variables = [];
-            
-            public function setVariable(\$key, \$value) {
-                \$this->variables[\$key] = \$value;
-            }
-            
-            public function getVariable(\$key) {
-                return \$this->variables[\$key] ?? null;
-            }
-            
-            public function view(\$view, \$data = []) {
-                return true;
-            }
-
-            public function process() {
-                return true;
-            }
-        }");
+foreach ($fragments as $fragment) {
+    $path = $fragment_dir . '/' . $fragment;
+    if (!file_exists($path)) {
+        file_put_contents($path, '<?php // Mock fragment file ?>');
     }
 }

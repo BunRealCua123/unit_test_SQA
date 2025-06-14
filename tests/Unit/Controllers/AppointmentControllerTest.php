@@ -3,8 +3,9 @@
 namespace Tests\Unit\Controllers;
 
 use PHPUnit\Framework\TestCase;
-use AppointmentController;
-use UserModel;
+
+// Đảm bảo TestAppointmentController được load
+require_once dirname(dirname(__DIR__)) . '/TestAppointmentController.php';
 
 class AppointmentControllerTest extends TestCase
 {
@@ -13,8 +14,16 @@ class AppointmentControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->controller = new AppointmentController();
-        $this->user = new UserModel();
+        // Sử dụng TestAppointmentController thay vì AppointmentController
+        $this->controller = $this->getMockBuilder('TestAppointmentController')
+            ->onlyMethods(['view'])
+            ->getMock();
+
+        // Mock method view để không làm gì
+        $this->controller->method('view')
+            ->willReturn(null);
+
+        $this->user = new \UserModel();
         $this->user->set("id", 1);
         $this->user->set("name", "Test User");
         $this->user->set("email", "test@example.com");
@@ -23,25 +32,61 @@ class AppointmentControllerTest extends TestCase
 
     public function testProcessWithoutAuthUser()
     {
-        $this->assertTrue($this->controller->process());
+        $this->controller->setVariable("AuthUser", null);
+        $result = $this->controller->process();
+        $this->assertFalse($result, "Người dùng không đăng nhập phải chuyển hướng");
     }
 
     public function testProcessWithAuthUser()
     {
-        $_SESSION['user'] = $this->user;
-        $this->assertTrue($this->controller->process());
+        $this->controller->setVariable("AuthUser", $this->user);
+        $this->controller->setVariable("Route", (object)['params' => (object)[]]);
+
+        // Đặt kỳ vọng rằng view sẽ được gọi với 'appointment'
+        $this->controller->expects($this->once())
+            ->method('view')
+            ->with('appointment');
+
+        $result = $this->controller->process();
+        $this->assertTrue($result, "Controller phải trả về true với user đã đăng nhập");
     }
 
     public function testProcessWithId()
     {
-        $_GET['id'] = 1;
-        $this->assertTrue($this->controller->process());
+        $this->controller->setVariable("AuthUser", $this->user);
+        $this->controller->setVariable("Route", (object)['params' => (object)['id' => 1]]);
+
+        // Đặt kỳ vọng rằng view sẽ được gọi với 'appointment'
+        $this->controller->expects($this->once())
+            ->method('view')
+            ->with('appointment');
+
+        $result = $this->controller->process();
+        $this->assertTrue($result);
+        $this->assertEquals(1, $this->controller->getVariable("id"), "ID phải được thiết lập chính xác");
     }
 
     public function testProcessWithQueryParams()
     {
+        $this->controller->setVariable("AuthUser", $this->user);
+        $this->controller->setVariable("Route", (object)['params' => (object)[]]);
+
         $_GET['speciality'] = 'test';
         $_GET['doctor'] = 'test';
-        $this->assertTrue($this->controller->process());
+        $_GET['patientName'] = 'John Doe';
+
+        // Đặt kỳ vọng rằng view sẽ được gọi với 'appointment'
+        $this->controller->expects($this->once())
+            ->method('view')
+            ->with('appointment');
+
+        $result = $this->controller->process();
+        $this->assertTrue($result);
+    }
+
+    protected function tearDown(): void
+    {
+        // Xóa các giá trị $_GET sau mỗi test
+        $_GET = [];
     }
 }

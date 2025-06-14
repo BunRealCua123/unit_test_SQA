@@ -1868,3 +1868,65 @@ Stack trace:
 #0 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\index.php(92): App->__construct()
 #1 {main}
   thrown in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\core\App.php on line 20
+[14-Jun-2025 08:18:06 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+ in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\M in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:21:25 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:21:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:21:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:25:20 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1932 Table 'nextpost.np_plugins' doesn't exist in engine in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php:152
+Stack trace:
+#0 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php(152): PDOStatement->execute()
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php(173): Pixie\QueryBuilder\QueryBuilderHandler->statement('SELECT count(*)...', Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php(252): Pixie\QueryBuilder\QueryBuilderHandler->get()
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php(235): Pixie\Q in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\QueryBuilder\QueryBuilderHandler.php on line 152
+[14-Jun-2025 09:55:49 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:55:50 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138
+[14-Jun-2025 09:55:51 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'nextpost' in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php:138
+Stack trace:
+#0 [internal function]: PDO->__construct('mysql:dbname=ne...', 'root', '', Array)
+#1 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(138): ReflectionClass->newInstanceArgs(Array)
+#2 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php(110): Viocon\Container->instanciate('\\PDO', Array)
+#3 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\Mysql.php(28): Viocon\Container->build('\\PDO', Array)
+#4 D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\pixie\src\Pixie\ConnectionAdapters\BaseAdapter.php(28): Pixie\ConnectionAdapters\Mysql->doConnect(Array)
+#5 D:\xampp1\htdocs\PTIT-Do in D:\xampp1\htdocs\PTIT-Do-An-Tot-Nghiep\umbrella-corporation\app\vendor\usmanhalalit\viocon\src\Viocon\Container.php on line 138

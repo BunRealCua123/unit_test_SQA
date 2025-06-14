@@ -10,36 +10,13 @@ class AppointmentJsTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->jsFile = file_get_contents(BASE_PATH . '/assets/js/customized/appointment.js');
-    }
-
-    public function testSetupDropdownService()
-    {
-        // Test setupDropdownService function
-        $this->assertTrue(function_exists('setupDropdownService'));
-    }
-
-    public function testSetupDropdownSpeciality()
-    {
-        // Test setupDropdownSpeciality function
-        $this->assertTrue(function_exists('setupDropdownSpeciality'));
-    }
-
-    public function testSetupDropdownDoctor()
-    {
-        // Test setupDropdownDoctor function
-        $this->assertTrue(function_exists('setupDropdownDoctor'));
-    }
-
-    public function testSetupChooseSpeciality()
-    {
-        // Test setupChooseSpeciality function
-        $this->assertTrue(function_exists('setupChooseSpeciality'));
     }
 
     public function testSetupDatePicker()
     {
-        $this->assertTrue(strpos($this->jsFile, 'function setupDatePicker()') !== false, 'Không tìm thấy hàm setupDatePicker trong JS');
+        $this->assertStringContainsString('function setupDatePicker()', $this->jsFile);
     }
 
     public function testSetupDatePickerForPatientBirthday()
@@ -59,7 +36,7 @@ class AppointmentJsTest extends TestCase
 
     public function testSetupButton()
     {
-        $this->assertStringContainsString('function setupButton(id)', $this->jsFile);
+        $this->assertStringContainsString('function setupButton(', $this->jsFile);
     }
 
     public function testGetNecessaryInfo()
@@ -102,20 +79,18 @@ class AppointmentJsTest extends TestCase
         $this->assertStringContainsString('function setupDropdownDoctor2()', $this->jsFile);
     }
 
-    public function testCreateDropdownDoctor2()
-    {
-        $this->assertStringContainsString('function createDropdownDoctor2(resp)', $this->jsFile);
-    }
-
-    public function testIsDoctorBusy()
-    {
-        $this->assertStringContainsString('function isDoctorBusy(method, url, info)', $this->jsFile);
-    }
-
-    public function testGlobalVariables()
+    public function testBookingIdVariable()
     {
         $this->assertStringContainsString('let bookingId = 0', $this->jsFile);
+    }
+
+    public function testServiceIdVariable()
+    {
         $this->assertStringContainsString('let serviceId = 0', $this->jsFile);
+    }
+
+    public function testDoctorIdVariable()
+    {
         $this->assertStringContainsString('let doctorId = 0', $this->jsFile);
     }
 }

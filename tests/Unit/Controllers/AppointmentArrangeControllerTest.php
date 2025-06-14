@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+// Đường dẫn chính xác đến TestAppointmentArrangeController.php
+require_once dirname(dirname(__DIR__)) . '/TestAppointmentArrangeController.php';
+
 class AppointmentArrangeControllerTest extends TestCase
 {
     private $controller;
@@ -10,24 +13,46 @@ class AppointmentArrangeControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->controller = new AppointmentArrangeController();
-        $this->authUser = $this->createMock('User');
+
+        // Sử dụng TestAppointmentArrangeController thay vì AppointmentArrangeController
+        $this->controller = $this->getMockBuilder('TestAppointmentArrangeController')
+            ->onlyMethods(['view'])
+            ->getMock();
+
+        $this->controller->method('view')
+            ->willReturn(null);
+
+        if (class_exists('App\Models\User')) {
+            $this->authUser = new \App\Models\User(1, 'Test User', 'test@example.com', 'admin');
+        } else if (class_exists('UserModel')) {
+            $this->authUser = new UserModel();
+        } else {
+            // Fallback nếu không có class User nào
+            $this->authUser = new stdClass();
+            $this->authUser->id = 1;
+            $this->authUser->name = 'Test User';
+        }
     }
 
     public function testProcessWithoutAuthUser()
     {
-        // Test redirect to login when no auth user
         $this->controller->setVariable("AuthUser", null);
-        $this->expectOutputString('');
-        $this->controller->process();
+
+        // Kiểm tra kết quả process() thay vì bắt exception
+        $result = $this->controller->process();
+        $this->assertFalse($result, "Controller đã không chuyển hướng khi không có người dùng đăng nhập");
     }
 
     public function testProcessWithAuthUser()
     {
-        // Test with authenticated user
+        // Thiết lập kỳ vọng rằng view sẽ được gọi với tham số 'appointmentArrange'
+        $this->controller->expects($this->once())
+            ->method('view')
+            ->with('appointmentArrange');
+
         $this->controller->setVariable("AuthUser", $this->authUser);
-        $this->controller->process();
-        // Verify view is called
-        $this->expectOutputString('');
+
+        $result = $this->controller->process();
+        $this->assertTrue($result, "Controller đã không hiển thị view khi có người dùng đăng nhập");
     }
 }
